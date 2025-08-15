@@ -4,204 +4,450 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lanchonete Sabor Caseiro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lobster&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #d62828; /* Vermelho vibrante */
+      --secondary-color: #f77f00; /* Laranja energético */
+      --text-color: #333;
+      --background-light: #fafafa;
+      --card-background: #ffffff;
+      --shadow-light: rgba(0,0,0,0.15);
+      --hover-scale: 1.03;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
-      background: #fafafa;
-      color: #333;
+      background: var(--background-light);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Animação de entrada */
+    body.fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     header {
-      background: #d62828;
+      background: var(--primary-color);
       color: #fff;
-      padding: 1rem;
+      padding: 1.5rem 1rem;
       text-align: center;
+      box-shadow: 0 4px 15px var(--shadow-light);
     }
 
     header h1 {
+      font-family: 'Lobster', cursive;
       margin: 0;
+      font-size: 3.5rem; /* Tamanho maior para o título */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-top: 0.5rem;
     }
 
     nav {
-      background: #f77f00;
-      padding: 0.5rem;
+      background: var(--secondary-color);
+      padding: 0.8rem 0;
       text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     nav a {
-      margin: 0 1rem;
+      margin: 0 1.5rem;
       color: white;
-      font-weight: bold;
+      font-weight: 600;
       text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative; /* Para o efeito de sublinhado */
+    }
+
+    nav a:hover {
+      color: #ffe0b3; /* Cor mais clara no hover */
+      transform: translateY(-2px);
+    }
+
+    nav a::after { /* Sublinhado animado */
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      display: block;
+      margin-top: 5px;
+      right: 0;
+      background: #ffe0b3;
+      transition: width 0.4s ease;
+      -webkit-transition: width 0.4s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+      left: 0;
+      background: #ffe0b3;
     }
 
     .search-container {
       text-align: center;
-      padding: 1rem;
+      padding: 2rem 1rem;
+      background: linear-gradient(to right, var(--background-light), #fff);
+      position: sticky; /* Sticky search bar */
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .search-container input {
-      padding: 0.6rem;
-      width: 60%;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
+      padding: 0.8rem 1.2rem;
+      width: 70%;
+      max-width: 500px;
+      border: 2px solid var(--secondary-color);
+      border-radius: 50px; /* Borda mais arredondada */
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .search-container input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(214, 40, 40, 0.2);
     }
 
     section {
-      padding: 2rem;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     h2 {
-      color: #d62828;
-      margin-bottom: 1rem;
+      color: var(--primary-color);
+      margin-bottom: 2.5rem;
+      text-align: center;
+      font-size: 2.5rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2::after { /* Linha decorativa abaixo do título */
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary-color);
+      border-radius: 2px;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Cards maiores */
+      gap: 2.5rem;
+      justify-content: center;
     }
 
     .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: var(--card-background);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px var(--shadow-light);
       overflow: hidden;
-      transition: transform 0.2s;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease; /* Animação mais suave */
+      display: flex; /* Para centralizar o conteúdo verticalmente */
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card:hover {
-      transform: scale(1.05);
+      transform: translateY(-8px) scale(var(--hover-scale));
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
     }
 
     .card img {
       width: 100%;
-      height: 150px;
+      height: 200px; /* Imagens maiores */
       object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
     }
 
     .card-content {
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
+      flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card-content h3 {
-      margin: 0.5rem 0;
+      margin: 0.8rem 0;
+      font-size: 1.6rem;
+      color: var(--primary-color);
+    }
+
+    .card-content p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
     }
 
     .price {
-      color: #f77f00;
-      font-weight: bold;
-      font-size: 1.2rem;
+      color: var(--secondary-color);
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-top: auto; /* Empurra o preço para baixo */
+    }
+
+    /* Botão "Pedir Agora" */
+    .btn-order {
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(247, 127, 0, 0.3);
+    }
+
+    .btn-order:hover {
+      background-color: #ff912a;
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      box-shadow: 0 -4px 15px var(--shadow-light);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      nav a {
+        margin: 0 0.8rem;
+        font-size: 1rem;
+      }
+
+      .search-container input {
+        width: 85%;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+      }
     }
   </style>
 </head>
-<body>
+<body class="fade-in">
 
   <header>
-    <h1>Lanchonete Sabor Caseiro</h1>
-    <p>O melhor sabor da cidade!</p>
+    <h1>Lanchonete Sabor Caseiro 🍔</h1>
+    <p>O melhor sabor da cidade, feito com amor! ❤️</p>
   </header>
 
   <nav>
     <a href="#lanches">Lanches</a>
     <a href="#bebidas">Bebidas</a>
     <a href="#sobremesas">Sobremesas</a>
+    <a href="#contato">Contato</a>
   </nav>
 
   <div class="search-container">
-    <input type="text" id="search" placeholder="Pesquisar no cardápio...">
+    <input type="text" id="search" placeholder="Pesquisar no cardápio delicioso...">
   </div>
 
-  <!-- Lanches -->
   <section id="lanches">
-    <h2>Lanches</h2>
+    <h2>Lanches Saborosos 😋</h2>
     <div class="menu-grid">
       <div class="card" data-name="X-Burguer">
         <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="X-Burguer">
         <div class="card-content">
-          <h3>X-Burguer</h3>
-          <p>Pão, carne, queijo e salada</p>
+          <h3>X-Burguer 🍔</h3>
+          <p>Nosso clássico X-Burguer com pão fofinho, carne suculenta, queijo derretido e salada fresca.</p>
           <p class="price">R$ 15,00</p>
+          <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
       <div class="card" data-name="X-Salada">
         <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="X-Salada">
         <div class="card-content">
-          <h3>X-Salada</h3>
-          <p>Pão, carne, queijo, salada e molho especial</p>
+          <h3>X-Salada 🥗</h3>
+          <p>O delicioso X-Salada, com a combinação perfeita de carne, queijo, salada crocante e nosso molho especial.</p>
           <p class="price">R$ 18,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+      <div class="card" data-name="Misto Quente">
+        <img src="https://images.unsplash.com/photo-1621980894566-f56b509f6e69?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjd8MHwxfHNlYXJjaHwxfHxob3QyMGNoZWVzZSUyMHNhbmR3aWNofGVufDB8fHx8MTcwNDIwNTQ4Nnww&ixlib=rb-4.0.3&q=80&w=1080" alt="Misto Quente">
+        <div class="card-content">
+          <h3>Misto Quente 🥪</h3>
+          <p>Pão de forma tostado na chapa com queijo e presunto derretidos.</p>
+          <p class="price">R$ 10,00</p>
+          <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Bebidas -->
+  ---
+
   <section id="bebidas">
-    <h2>Bebidas</h2>
+    <h2>Bebidas Refrescantes 🍹</h2>
     <div class="menu-grid">
       <div class="card" data-name="Refrigerante Lata">
         <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde" alt="Refrigerante">
         <div class="card-content">
-          <h3>Refrigerante Lata</h3>
-          <p>350ml</p>
+          <h3>Refrigerante Lata 🥤</h3>
+          <p>Diversas opções de refrigerantes para acompanhar seu lanche. (350ml)</p>
           <p class="price">R$ 6,00</p>
+          <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
       <div class="card" data-name="Suco Natural">
         <img src="https://images.unsplash.com/photo-1600271886207-62c5b33a4f86" alt="Suco Natural">
         <div class="card-content">
-          <h3>Suco Natural</h3>
-          <p>Laranja, limão ou maracujá</p>
+          <h3>Suco Natural 🍊</h3>
+          <p>Feito na hora, escolha entre laranja, limão ou maracujá para uma dose de frescor.</p>
           <p class="price">R$ 8,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+      <div class="card" data-name="Água Mineral">
+        <img src="https://images.unsplash.com/photo-1627348777991-64585642a420?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjd8MHwxfHNlYXJjaHwxfHx3YXRlciUyMGJvdHRsZSUyMGRyaW5rfGVufDB8fHx8MTcwNDIwNTU3NHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Água Mineral">
+        <div class="card-content">
+          <h3>Água Mineral 💧</h3>
+          <p>Sua opção para se manter hidratado.</p>
+          <p class="price">R$ 4,00</p>
+          <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Sobremesas -->
+  ---
+
   <section id="sobremesas">
-    <h2>Sobremesas</h2>
+    <h2>Sobremesas Doces 🍰</h2>
     <div class="menu-grid">
       <div class="card" data-name="Pudim">
         <img src="https://images.unsplash.com/photo-1624353365286-3f7b2f24f152" alt="Pudim">
         <div class="card-content">
-          <h3>Pudim</h3>
-          <p>Clássico pudim de leite condensado</p>
+          <h3>Pudim de Leite Condensado 🍮</h3>
+          <p>O clássico e irresistível pudim de leite condensado com calda de caramelo.</p>
           <p class="price">R$ 7,00</p>
+          <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
       <div class="card" data-name="Mousse de Chocolate">
         <img src="https://images.unsplash.com/photo-1605478482876-89671a4a77df" alt="Mousse de Chocolate">
         <div class="card-content">
-          <h3>Mousse de Chocolate</h3>
-          <p>Delicioso e cremoso</p>
+          <h3>Mousse de Chocolate 🍫</h3>
+          <p>Deliciosa e cremosa mousse de chocolate, perfeita para finalizar sua refeição.</p>
           <p class="price">R$ 9,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+      <div class="card" data-name="Bolo do Dia">
+        <img src="https://images.unsplash.com/photo-1563729780074-f20387413665?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjd8MHwxfHNlYXJjaHwxfHxjaG9jb2xhdGUyMGNha2V8ZW58MHx8fHwxNzA0MjA1NzA5fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Bolo do Dia">
+        <div class="card-content">
+          <h3>Bolo do Dia 🎂</h3>
+          <p>Consulte a opção do dia! Sempre uma novidade deliciosa esperando por você.</p>
+          <p class="price">R$ 12,00</p>
+          <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
     </div>
   </section>
 
+  ---
+
+  <footer id="contato">
+    <p>&copy; 2025 Lanchonete Sabor Caseiro. Todos os direitos reservados.</p>
+    <p>Rua Exemplo, 123 - Centro, Porto Alegre/RS</p>
+    <p>Telefone: (51) 98765-4321 | Email: contato@saborcaseiro.com.br</p>
+    <p>Siga-nos nas redes sociais! 📱</p>
+  </footer>
+
   <script>
-    // Script de pesquisa
+    // Animação de fade-in ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('fade-in');
+    });
+
+    // Script de pesquisa aprimorado
     const searchInput = document.getElementById('search');
     const cards = document.querySelectorAll('.card');
 
     searchInput.addEventListener('input', () => {
-      const searchValue = searchInput.value.toLowerCase();
+      const searchValue = searchInput.value.toLowerCase().trim();
       cards.forEach(card => {
         const itemName = card.dataset.name.toLowerCase();
-        if (itemName.includes(searchValue)) {
-          card.style.display = 'block';
+        const itemDescription = card.querySelector('p:not(.price)').textContent.toLowerCase(); // Pesquisa também na descrição
+
+        if (itemName.includes(searchValue) || itemDescription.includes(searchValue)) {
+          card.style.display = 'flex'; /* Mantém o display flex */
         } else {
           card.style.display = 'none';
         }
       });
     });
+
+    // Animação de rolagem suave para as âncoras da navegação
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Efeito de hover nos botões "Pedir Agora" (feedback visual)
+    document.querySelectorAll('.btn-order').forEach(button => {
+      button.addEventListener('click', () => {
+        alert('Item adicionado ao carrinho! (Funcionalidade de pedido em breve)');
+      });
+    });
+
+    // Efeito Parallax no Header (opcional, para um toque extra de dinamismo)
+    // window.addEventListener('scroll', () => {
+    //   const header = document.querySelector('header');
+    //   let scrollPosition = window.pageYOffset;
+    //   header.style.backgroundPositionY = -scrollPosition * 0.5 + 'px'; // Ajuste o 0.5 para mais ou menos efeito
+    // });
   </script>
 
 </body>
 </html>
-
