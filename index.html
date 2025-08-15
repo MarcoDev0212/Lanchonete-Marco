@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lanchonete Sabor Caseiro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lobster&display=swap" rel="stylesheet">
+  <title>Lanchonete Sabor Caseiro | Qualidade Gourmet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #d62828; /* Vermelho vibrante */
-      --secondary-color: #f77f00; /* Laranja energético */
-      --text-color: #333;
-      --background-light: #fafafa;
-      --card-background: #ffffff;
-      --shadow-light: rgba(0,0,0,0.15);
-      --hover-scale: 1.03;
+      --primary-dark: #3a3a3a; /* Quase preto, para textos e elementos principais */
+      --secondary-brown: #8B4513; /* Tom de madeira/marrom, inspirado no Madero */
+      --accent-gold: #D4AF37; /* Dourado sutil para detalhes e destaques */
+      --light-gray: #f5f5f5; /* Fundo principal */
+      --white: #ffffff;
+      --shadow-subtle: rgba(0, 0, 0, 0.1);
+      --hover-scale: 1.02;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       margin: 0;
-      background: var(--background-light);
-      color: var(--text-color);
+      background-color: var(--light-gray);
+      color: var(--primary-dark);
       line-height: 1.6;
+      overflow-x: hidden; /* Evita scroll horizontal */
     }
 
-    /* Animação de entrada */
+    /* Animação de entrada geral */
     body.fade-in {
       animation: fadeIn 1s ease-out forwards;
     }
@@ -34,46 +35,72 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* --- Header --- */
     header {
-      background: var(--primary-color);
-      color: #fff;
-      padding: 1.5rem 1rem;
+      background-color: var(--primary-dark);
+      color: var(--white);
+      padding: 3rem 1rem;
       text-align: center;
-      box-shadow: 0 4px 15px var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px var(--shadow-subtle);
+    }
+
+    header::before { /* Efeito de fundo sutil para o header */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+      opacity: 0.15; /* Sutil */
+      filter: grayscale(100%);
+      z-index: 1;
     }
 
     header h1 {
-      font-family: 'Lobster', cursive;
+      font-family: 'Playfair Display', serif;
       margin: 0;
-      font-size: 3.5rem; /* Tamanho maior para o título */
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      font-size: 4.5rem; /* Tamanho do título mais imponente */
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 2;
     }
 
     header p {
-      font-size: 1.2rem;
-      font-style: italic;
-      margin-top: 0.5rem;
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 2;
     }
 
+    /* --- Navegação --- */
     nav {
-      background: var(--secondary-color);
-      padding: 0.8rem 0;
+      background-color: var(--secondary-brown);
+      padding: 1rem 0;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      position: sticky; /* Sticky nav */
+      top: 0;
+      z-index: 1000;
     }
 
     nav a {
-      margin: 0 1.5rem;
-      color: white;
-      font-weight: 600;
+      margin: 0 2rem;
+      color: var(--white);
+      font-weight: 500;
       text-decoration: none;
-      font-size: 1.1rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      position: relative; /* Para o efeito de sublinhado */
+      font-size: 1.15rem;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-bottom: 5px;
     }
 
     nav a:hover {
-      color: #ffe0b3; /* Cor mais clara no hover */
+      color: var(--accent-gold);
       transform: translateY(-2px);
     }
 
@@ -81,61 +108,115 @@
       content: '';
       position: absolute;
       width: 0;
-      height: 3px;
-      display: block;
-      margin-top: 5px;
-      right: 0;
-      background: #ffe0b3;
-      transition: width 0.4s ease;
-      -webkit-transition: width 0.4s ease;
+      height: 2px;
+      background: var(--accent-gold);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.3s ease-out;
     }
 
     nav a:hover::after {
       width: 100%;
+    }
+
+    /* --- Busca e Destaques (Hero Section) --- */
+    .hero-section {
+      position: relative;
+      height: 450px; /* Altura da seção de destaque */
+      background: url('https://images.unsplash.com/photo-1571091718767-f81d182f7193?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: var(--white);
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
       left: 0;
-      background: #ffe0b3;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Escurece a imagem para o texto sobressair */
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: slideInUp 0.8s ease-out forwards;
+      padding: 0 1rem;
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
     }
 
     .search-container {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: linear-gradient(to right, var(--background-light), #fff);
-      position: sticky; /* Sticky search bar */
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-top: 1rem;
     }
 
     .search-container input {
-      padding: 0.8rem 1.2rem;
-      width: 70%;
-      max-width: 500px;
-      border: 2px solid var(--secondary-color);
-      border-radius: 50px; /* Borda mais arredondada */
+      padding: 1rem 1.5rem;
+      width: 80%;
+      max-width: 550px;
+      border: 1px solid var(--accent-gold);
+      border-radius: 50px;
       font-size: 1.1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--primary-dark);
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .search-container input::placeholder {
+      color: #777;
     }
 
     .search-container input:focus {
       outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 4px rgba(214, 40, 40, 0.2);
+      border-color: var(--secondary-brown);
+      box-shadow: 0 0 0 4px rgba(139, 69, 19, 0.2);
     }
 
+    /* --- Seções do Menu --- */
     section {
-      padding: 3rem 2rem;
+      padding: 4rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 8px 25px var(--shadow-subtle);
+      margin-top: 3rem;
     }
 
+    section:first-of-type {
+        margin-top: -80px; /* Para sobrepor um pouco o hero */
+        position: relative;
+        z-index: 5;
+    }
+
+
     h2 {
-      color: var(--primary-color);
-      margin-bottom: 2.5rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--secondary-brown);
+      margin-bottom: 3.5rem;
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 3rem;
       position: relative;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
+      letter-spacing: 1px;
     }
 
     h2::after { /* Linha decorativa abaixo do título */
@@ -144,106 +225,159 @@
       left: 50%;
       transform: translateX(-50%);
       bottom: 0;
-      width: 80px;
-      height: 4px;
-      background: var(--secondary-color);
+      width: 120px;
+      height: 3px;
+      background: var(--accent-gold);
       border-radius: 2px;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Cards maiores */
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
       justify-content: center;
     }
 
     .card {
-      background: var(--card-background);
-      border-radius: 15px;
-      box-shadow: 0 8px 20px var(--shadow-light);
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px var(--shadow-subtle);
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease; /* Animação mais suave */
-      display: flex; /* Para centralizar o conteúdo verticalmente */
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+      display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .card:hover {
-      transform: translateY(-8px) scale(var(--hover-scale));
-      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+      transform: translateY(-10px) scale(var(--hover-scale));
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
 
     .card img {
       width: 100%;
-      height: 200px; /* Imagens maiores */
+      height: 220px; /* Imagens maiores e com destaque */
       object-fit: cover;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
     }
 
     .card-content {
-      padding: 1.5rem;
+      padding: 1.8rem;
       text-align: center;
-      flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .card-content h3 {
+      font-family: 'Playfair Display', serif;
       margin: 0.8rem 0;
-      font-size: 1.6rem;
-      color: var(--primary-color);
+      font-size: 1.8rem;
+      color: var(--primary-dark);
     }
 
     .card-content p {
       font-size: 1rem;
-      color: #666;
-      margin-bottom: 1rem;
+      color: #555;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
     }
 
     .price {
-      color: var(--secondary-color);
+      color: var(--accent-gold);
       font-weight: 700;
-      font-size: 1.8rem;
-      margin-top: auto; /* Empurra o preço para baixo */
+      font-size: 2rem;
+      margin-top: auto;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
 
     /* Botão "Pedir Agora" */
     .btn-order {
-      background-color: var(--secondary-color);
-      color: white;
+      background-color: var(--secondary-brown);
+      color: var(--white);
       border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
+      padding: 1rem 2rem;
+      border-radius: 50px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-top: 1rem;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(247, 127, 0, 0.3);
+      margin-top: 1.5rem;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 15px rgba(139, 69, 19, 0.4);
     }
 
     .btn-order:hover {
-      background-color: #ff912a;
-      transform: translateY(-3px);
+      background-color: #A0522D; /* Tom mais escuro de marrom */
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(139, 69, 19, 0.6);
     }
 
-    /* Footer */
-    footer {
-      background: var(--primary-color);
-      color: #fff;
+    /* --- Section Contato --- */
+    #contato {
+      background-color: var(--primary-dark);
+      color: var(--white);
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 4rem 2rem;
+      margin-top: 3rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px var(--shadow-subtle);
+    }
+
+    #contato h2 {
+      color: var(--white);
+    }
+
+    #contato p {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    #contato a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    #contato a:hover {
+      color: #FFD700; /* Dourado mais vibrante */
+    }
+
+    .social-icons {
+      margin-top: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .social-icons a {
+      color: var(--white);
+      margin: 0 1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--accent-gold);
+      transform: scale(1.2);
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: var(--secondary-brown);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem 1rem;
       margin-top: 4rem;
       font-size: 0.9rem;
-      box-shadow: 0 -4px 15px var(--shadow-light);
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
     }
 
-    /* Responsividade */
+    /* --- Responsividade --- */
     @media (max-width: 768px) {
       header h1 {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
+      }
+      header p {
+        font-size: 1.1rem;
       }
 
       nav a {
@@ -251,20 +385,69 @@
         font-size: 1rem;
       }
 
+      .hero-section {
+        height: 350px;
+      }
+      .hero-content h2 {
+        font-size: 2.5rem;
+      }
       .search-container input {
-        width: 85%;
+        width: 90%;
+        padding: 0.8rem 1rem;
       }
 
       section {
-        padding: 2rem 1rem;
+        padding: 3rem 1rem;
       }
 
       h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .menu-grid {
-        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 180px;
+      }
+
+      .card-content h3 {
+        font-size: 1.5rem;
+      }
+
+      .price {
+        font-size: 1.6rem;
+      }
+
+      .btn-order {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.8rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      nav {
+        padding: 0.6rem 0;
+      }
+      nav a {
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+      .hero-section {
+        height: 300px;
+      }
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -272,131 +455,147 @@
 <body class="fade-in">
 
   <header>
-    <h1>Lanchonete Sabor Caseiro 🍔</h1>
-    <p>O melhor sabor da cidade, feito com amor! ❤️</p>
+    <h1>Sabor Caseiro</h1>
+    <p>A experiência gourmet que você merece.</p>
   </header>
 
   <nav>
-    <a href="#lanches">Lanches</a>
-    <a href="#bebidas">Bebidas</a>
-    <a href="#sobremesas">Sobremesas</a>
-    <a href="#contato">Contato</a>
+    <a href="#menu">Cardápio Completo</a>
+    <a href="#lanches">Hambúrgueres Especiais</a>
+    <a href="#bebidas">Bebidas Exclusivas</a>
+    <a href="#sobremesas">Sobremesas Artesanais</a>
+    <a href="#contato">Reservas e Contato</a>
   </nav>
 
-  <div class="search-container">
-    <input type="text" id="search" placeholder="Pesquisar no cardápio delicioso...">
+  <div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2>Sua Melhor Experiência Gastronômica Começa Aqui.</h2>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Buscar um prato no nosso menu exclusivo...">
+      </div>
+    </div>
   </div>
 
-  <section id="lanches">
-    <h2>Lanches Saborosos 😋</h2>
+  <section id="menu">
+    <h2>Nosso Cardápio Gourmet</h2>
     <div class="menu-grid">
-      <div class="card" data-name="X-Burguer">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="X-Burguer">
+      <div class="card" data-name="Cheeseburger Clássico" data-category="lanches">
+        <img src="https://images.unsplash.com/photo-1571091718767-f81d182f7193?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cheeseburger Clássico">
         <div class="card-content">
-          <h3>X-Burguer 🍔</h3>
-          <p>Nosso clássico X-Burguer com pão fofinho, carne suculenta, queijo derretido e salada fresca.</p>
-          <p class="price">R$ 15,00</p>
+          <h3>Cheeseburger Clássico</h3>
+          <p>Nosso pão brioche artesanal, burger de angus 180g, queijo cheddar derretido e maionese da casa.</p>
+          <p class="price">R$ 38,00</p>
           <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
-      <div class="card" data-name="X-Salada">
-        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="X-Salada">
+      <div class="card" data-name="Burger Madero Original" data-category="lanches">
+        <img src="https://images.unsplash.com/photo-1547592180-85f17399042f?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Burger Madero Original">
         <div class="card-content">
-          <h3>X-Salada 🥗</h3>
-          <p>O delicioso X-Salada, com a combinação perfeita de carne, queijo, salada crocante e nosso molho especial.</p>
-          <p class="price">R$ 18,00</p>
+          <h3>Burger Madero Original</h3>
+          <p>O famoso burger Madero: pão crocante, carne suculenta, alface, tomate orgânico e maionese artesanal.</p>
+          <p class="price">R$ 45,00</p>
           <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
-      <div class="card" data-name="Misto Quente">
-        <img src="https://images.unsplash.com/photo-1621980894566-f56b509f6e69?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjd8MHwxfHNlYXJjaHwxfHxob3QyMGNoZWVzZSUyMHNhbmR3aWNofGVufDB8fHx8MTcwNDIwNTQ4Nnww&ixlib=rb-4.0.3&q=80&w=1080" alt="Misto Quente">
+      <div class="card" data-name="X-Salada Premium" data-category="lanches">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="X-Salada Premium">
         <div class="card-content">
-          <h3>Misto Quente 🥪</h3>
-          <p>Pão de forma tostado na chapa com queijo e presunto derretidos.</p>
-          <p class="price">R$ 10,00</p>
+          <h3>X-Salada Premium</h3>
+          <p>Combinação perfeita de carne, queijo, salada fresca e nosso exclusivo molho especial da casa.</p>
+          <p class="price">R$ 42,00</p>
           <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
-    </div>
-  </section>
 
-  ---
-
-  <section id="bebidas">
-    <h2>Bebidas Refrescantes 🍹</h2>
-    <div class="menu-grid">
-      <div class="card" data-name="Refrigerante Lata">
-        <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde" alt="Refrigerante">
+      <div class="card" data-name="Refrigerante Artesanal" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1629810332824-c1044498ec56?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Refrigerante Artesanal">
         <div class="card-content">
-          <h3>Refrigerante Lata 🥤</h3>
-          <p>Diversas opções de refrigerantes para acompanhar seu lanche. (350ml)</p>
-          <p class="price">R$ 6,00</p>
-          <button class="btn-order">Pedir Agora</button>
-        </div>
-      </div>
-      <div class="card" data-name="Suco Natural">
-        <img src="https://images.unsplash.com/photo-1600271886207-62c5b33a4f86" alt="Suco Natural">
-        <div class="card-content">
-          <h3>Suco Natural 🍊</h3>
-          <p>Feito na hora, escolha entre laranja, limão ou maracujá para uma dose de frescor.</p>
-          <p class="price">R$ 8,00</p>
-          <button class="btn-order">Pedir Agora</button>
-        </div>
-      </div>
-      <div class="card" data-name="Água Mineral">
-        <img src="https://images.unsplash.com/photo-1627348777991-64585642a420?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjd8MHwxfHNlYXJjaHwxfHx3YXRlciUyMGJvdHRsZSUyMGRyaW5rfGVufDB8fHx8MTcwNDIwNTU3NHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Água Mineral">
-        <div class="card-content">
-          <h3>Água Mineral 💧</h3>
-          <p>Sua opção para se manter hidratado.</p>
-          <p class="price">R$ 4,00</p>
-          <button class="btn-order">Pedir Agora</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  ---
-
-  <section id="sobremesas">
-    <h2>Sobremesas Doces 🍰</h2>
-    <div class="menu-grid">
-      <div class="card" data-name="Pudim">
-        <img src="https://images.unsplash.com/photo-1624353365286-3f7b2f24f152" alt="Pudim">
-        <div class="card-content">
-          <h3>Pudim de Leite Condensado 🍮</h3>
-          <p>O clássico e irresistível pudim de leite condensado com calda de caramelo.</p>
-          <p class="price">R$ 7,00</p>
-          <button class="btn-order">Pedir Agora</button>
-        </div>
-      </div>
-      <div class="card" data-name="Mousse de Chocolate">
-        <img src="https://images.unsplash.com/photo-1605478482876-89671a4a77df" alt="Mousse de Chocolate">
-        <div class="card-content">
-          <h3>Mousse de Chocolate 🍫</h3>
-          <p>Deliciosa e cremosa mousse de chocolate, perfeita para finalizar sua refeição.</p>
-          <p class="price">R$ 9,00</p>
-          <button class="btn-order">Pedir Agora</button>
-        </div>
-      </div>
-      <div class="card" data-name="Bolo do Dia">
-        <img src="https://images.unsplash.com/photo-1563729780074-f20387413665?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjd8MHwxfHNlYXJjaHwxfHxjaG9jb2xhdGUyMGNha2V8ZW58MHx8fHwxNzA0MjA1NzA5fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Bolo do Dia">
-        <div class="card-content">
-          <h3>Bolo do Dia 🎂</h3>
-          <p>Consulte a opção do dia! Sempre uma novidade deliciosa esperando por você.</p>
+          <h3>Refrigerante Artesanal</h3>
+          <p>Produção própria com sabores únicos: Cola, Guaraná e Limão Siciliano.</p>
           <p class="price">R$ 12,00</p>
           <button class="btn-order">Pedir Agora</button>
         </div>
       </div>
+      <div class="card" data-name="Chá Gelado da Casa" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1517457375-a86d26277b06?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Chá Gelado da Casa">
+        <div class="card-content">
+          <h3>Chá Gelado da Casa</h3>
+          <p>Refrescante chá de hibisco com frutas vermelhas ou chá verde com hortelã e limão.</p>
+          <p class="price">R$ 15,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+      <div class="card" data-name="Limonada Rosa" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1625225028059-4d6b5e0c812d?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Limonada Rosa">
+        <div class="card-content">
+          <h3>Limonada Rosa</h3>
+          <p>Nossa famosa limonada com um toque de frutas vermelhas e xarope de açúcar de coco.</p>
+          <p class="price">R$ 14,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Petit Gâteau de Doce de Leite" data-category="sobremesas">
+        <img src="https://images.unsplash.com/photo-1551026040-5e3a8b4b7c19?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Petit Gâteau de Doce de Leite">
+        <div class="card-content">
+          <h3>Petit Gâteau de Doce de Leite</h3>
+          <p>O clássico do Madero, com calda quente de doce de leite e sorvete de baunilha.</p>
+          <p class="price">R$ 28,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+      <div class="card" data-name="Brownie com Sorvete" data-category="sobremesas">
+        <img src="https://images.unsplash.com/photo-1536761825282-f3f40f2d9c0f?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Brownie com Sorvete">
+        <div class="card-content">
+          <h3>Brownie com Sorvete</h3>
+          <p>Brownie de chocolate belga quentinho, servido com uma bola de sorvete de creme e calda de chocolate.</p>
+          <p class="price">R$ 25,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
+      <div class="card" data-name="Cheesecake de Frutas Vermelhas" data-category="sobremesas">
+        <img src="https://images.unsplash.com/photo-1587396752765-a33716a40232?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cheesecake de Frutas Vermelhas">
+        <div class="card-content">
+          <h3>Cheesecake de Frutas Vermelhas</h3>
+          <p>Leve e cremosa cheesecake com coulis de frutas vermelhas frescas.</p>
+          <p class="price">R$ 26,00</p>
+          <button class="btn-order">Pedir Agora</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  ---
+  <hr>
 
-  <footer id="contato">
+  <section id="lanches" style="display:none;">
+    </section>
+  <section id="bebidas" style="display:none;">
+    </section>
+  <section id="sobremesas" style="display:none;">
+    </section>
+
+
+  <section id="contato">
+    <h2>Entre em Contato e Faça Sua Reserva</h2>
+    <p>Estamos localizados na <br> **Rua Exemplo, 123 - Centro, Porto Alegre/RS**</p>
+    <p>Telefone para reservas e informações: <a href="tel:+5551987654321">(51) 98765-4321</a></p>
+    <p>Email: <a href="mailto:contato@saborcaseiro.com.br">contato@saborcaseiro.com.br</a></p>
+    <p>Horário de Funcionamento:</p>
+    <p>Domingo a Quinta: 11h30 - 22h00</p>
+    <p>Sexta e Sábado: 11h30 - 23h00</p>
+
+    <div class="social-icons">
+      <p>Siga-nos nas redes sociais:</p>
+      <a href="https://facebook.com/saborcaseiro" target="_blank" aria-label="Facebook"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook" width="30" height="30"></a>
+      <a href="https://instagram.com/saborcaseiro" target="_blank" aria-label="Instagram"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" width="30" height="30"></a>
+      <a href="https://wa.me/5551987654321" target="_blank" aria-label="WhatsApp"><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp" width="30" height="30"></a>
+    </div>
+  </section>
+
+  <footer>
     <p>&copy; 2025 Lanchonete Sabor Caseiro. Todos os direitos reservados.</p>
-    <p>Rua Exemplo, 123 - Centro, Porto Alegre/RS</p>
-    <p>Telefone: (51) 98765-4321 | Email: contato@saborcaseiro.com.br</p>
-    <p>Siga-nos nas redes sociais! 📱</p>
+    <p>Desenvolvido com paixão em Porto Alegre/RS.</p>
   </footer>
 
   <script>
@@ -405,22 +604,44 @@
       document.body.classList.add('fade-in');
     });
 
-    // Script de pesquisa aprimorado
+    // Script de pesquisa aprimorado para filtrar o grid
     const searchInput = document.getElementById('search');
     const cards = document.querySelectorAll('.card');
+    const menuSection = document.getElementById('menu');
+    const originalDisplayStates = {}; // Para armazenar o estado original de display dos cards
+
+    cards.forEach(card => {
+        originalDisplayStates[card.dataset.name] = window.getComputedStyle(card).display;
+    });
 
     searchInput.addEventListener('input', () => {
       const searchValue = searchInput.value.toLowerCase().trim();
+      let anyCardVisible = false;
+
       cards.forEach(card => {
         const itemName = card.dataset.name.toLowerCase();
-        const itemDescription = card.querySelector('p:not(.price)').textContent.toLowerCase(); // Pesquisa também na descrição
+        const itemDescription = card.querySelector('p:not(.price)').textContent.toLowerCase();
 
         if (itemName.includes(searchValue) || itemDescription.includes(searchValue)) {
-          card.style.display = 'flex'; /* Mantém o display flex */
+          card.style.display = originalDisplayStates[card.dataset.name]; // Restaura o display original (flex)
+          anyCardVisible = true;
         } else {
           card.style.display = 'none';
         }
       });
+
+      // Opcional: mostrar uma mensagem se não houver resultados
+      // const noResultsMessage = document.getElementById('no-results-message');
+      // if (!anyCardVisible && !noResultsMessage) {
+      //   const message = document.createElement('p');
+      //   message.id = 'no-results-message';
+      //   message.textContent = 'Nenhum item encontrado para sua busca.';
+      //   message.style.textAlign = 'center';
+      //   message.style.marginTop = '20px';
+      //   menuSection.appendChild(message);
+      // } else if (anyCardVisible && noResultsMessage) {
+      //   noResultsMessage.remove();
+      // }
     });
 
     // Animação de rolagem suave para as âncoras da navegação
@@ -428,25 +649,32 @@
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - (window.innerWidth <= 768 ? 60 : 80), // Ajusta para a barra de navegação sticky
+                behavior: 'smooth'
+            });
+        }
       });
     });
 
-    // Efeito de hover nos botões "Pedir Agora" (feedback visual)
+    // Feedback ao clicar no botão "Pedir Agora"
     document.querySelectorAll('.btn-order').forEach(button => {
       button.addEventListener('click', () => {
-        alert('Item adicionado ao carrinho! (Funcionalidade de pedido em breve)');
+        const itemName = button.closest('.card').dataset.name;
+        alert(`"${itemName}" adicionado à sua lista de pedidos! (Funcionalidade de carrinho/pedido em breve)`);
       });
     });
 
-    // Efeito Parallax no Header (opcional, para um toque extra de dinamismo)
-    // window.addEventListener('scroll', () => {
-    //   const header = document.querySelector('header');
-    //   let scrollPosition = window.pageYOffset;
-    //   header.style.backgroundPositionY = -scrollPosition * 0.5 + 'px'; // Ajuste o 0.5 para mais ou menos efeito
-    // });
+    // Opcional: Esconder seções específicas de Lanches, Bebidas, Sobremesas
+    // Se você quiser que a navegação para Lanches, Bebidas e Sobremesas filtre o menu completo
+    // em vez de rolar para seções separadas, você precisaria de um script mais complexo
+    // de filtragem ou carregar apenas uma seção e filtrar os itens dentro dela.
+    // Por enquanto, as seções específicas estão ocultas com display:none no CSS,
+    // pois o "Menu Completo" já mostra tudo. A navegação "Cardápio Completo" rola para #menu.
   </script>
 
 </body>
